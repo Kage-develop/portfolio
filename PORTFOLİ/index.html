@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Portfolio | Sübhan</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Developer from Baku, Azerbaijan. Coding since 2020 — C++, C#, Python, Web.">
+    <meta name="author" content="Sübhan Sultanlı">
+    <meta name="keywords" content="software developer, web developer, C++, Python, C#, Baku, Azerbaijan, portfolio">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kage-develop.github.io/">
+    <meta property="og:title" content="Sübhan Sultanlı — Software Developer">
+    <meta property="og:description" content="Developer from Baku, Azerbaijan. Coding since 2020 — C++, C#, Python, Web.">
+    <meta property="og:image" content="https://kage-develop.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Sübhan Sultanlı Portfolio">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sübhan Sultanlı — Software Developer">
+    <meta name="twitter:description" content="Developer from Baku, Azerbaijan. Coding since 2020 — C++, C#, Python, Web.">
+    <meta name="twitter:image" content="https://kage-develop.github.io/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+    /* LANG SWITCHER */
+    .lang-switcher{position:relative;display:flex;align-items:center}
+    .lang-current{display:flex;align-items:center;gap:7px;padding:6px 11px 6px 8px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg-alt);cursor:pointer;font-size:.82rem;font-weight:600;color:var(--text);transition:all .2s ease;user-select:none}
+    .lang-current:hover,.lang-switcher.open .lang-current{border-color:var(--primary);background:var(--bg-card)}
+    .flag-img{width:20px;height:14px;border-radius:3px;object-fit:cover;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,.28)}
+    .lang-code{font-size:.8rem;font-weight:700;letter-spacing:.03em}
+    .lang-chevron{font-size:.6rem;color:var(--text-light);transition:transform .25s ease;margin-left:1px}
+    .lang-switcher.open .lang-chevron{transform:rotate(180deg)}
+    .lang-dropdown{position:absolute;top:calc(100% + 9px);right:0;background:var(--bg-card);border:1.5px solid var(--border);border-radius:13px;box-shadow:0 14px 36px rgba(0,0,0,.18);overflow:hidden;min-width:162px;opacity:0;transform:translateY(-6px) scale(.97);pointer-events:none;transition:all .22s cubic-bezier(.4,0,.2,1);z-index:3000}
+    .lang-switcher.open .lang-dropdown{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+    .lang-option{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--text);background:transparent;border:none;width:100%;text-align:left;transition:background .15s ease}
+    .lang-option+.lang-option{border-top:1px solid var(--border)}
+    .lang-option:hover{background:var(--bg-alt)}
+    .lang-option.active{background:rgba(99,102,241,.09);color:var(--primary)}
+    .lang-option .flag-img{width:22px;height:15px}
+    .lang-name{flex:1}
+    .lang-check{font-size:.72rem;color:var(--primary);opacity:0}
+    .lang-option.active .lang-check{opacity:1}
+    /* NAV CV */
+    .nav-cv-btn{display:flex;align-items:center;gap:6px;padding:7px 15px;background:var(--gradient-primary);border:none;border-radius:10px;color:white;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .25s ease;white-space:nowrap}
+    .nav-cv-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(99,102,241,.45)}
+    .nav-cv-btn i{font-size:.78rem}
+    /* CV MODAL */
+    .cv-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(7px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+    .cv-modal-overlay.show{opacity:1;pointer-events:auto}
+    .cv-modal{background:var(--bg-card);border:1px solid var(--border);border-radius:22px;padding:2.6rem;max-width:430px;width:90%;text-align:center;box-shadow:0 32px 64px rgba(0,0,0,.32);transform:scale(.91) translateY(22px);transition:transform .32s cubic-bezier(.34,1.56,.64,1)}
+    .cv-modal-overlay.show .cv-modal{transform:scale(1) translateY(0)}
+    .cv-modal-icon{width:72px;height:72px;background:linear-gradient(135deg,#f43f5e,#fb923c);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem;font-size:1.9rem;color:white}
+    .cv-modal h3{font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:.7rem}
+    .cv-modal p{color:var(--text-light);line-height:1.65;font-size:.95rem;margin-bottom:1.9rem}
+    .cv-modal-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .cv-modal-actions .btn{padding:.75rem 1.5rem;font-size:.9rem}
+    /* CERTIFICATES */
+    .certificates{background:var(--bg);}
+    .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    @media(max-width:1100px){.cert-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:640px){.cert-grid{grid-template-columns:1fr;}}
+    .cert-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:all .3s ease;position:relative;}
+    .cert-card:hover{transform:translateY(-6px);box-shadow:0 0 28px rgba(99,102,241,.3);border-color:var(--primary);}
+    .cert-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);animation:shimmer 3s infinite;z-index:2;pointer-events:none;}
+    .cert-header{height:90px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative;}
+    .cert-badge{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);border-radius:20px;padding:3px 10px;font-size:.7rem;font-weight:700;color:white;letter-spacing:.05em;}
+    .cert-body{padding:1.2rem 1.3rem 1.3rem;}
+    .cert-body h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.35rem;line-height:1.3;}
+    .cert-issuer{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-light);margin-bottom:.25rem;}
+    .cert-issuer i{color:var(--primary);font-size:.75rem;}
+    .cert-date{font-size:.78rem;color:var(--text-light);margin-bottom:1rem;}
+    .cert-date i{margin-right:.3rem;color:var(--primary);}
+    .cert-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:600;color:var(--primary);text-decoration:none;padding:.4rem .9rem;border:1.5px solid var(--primary);border-radius:8px;transition:all .2s ease;}
+    .cert-link:hover{background:var(--primary);color:white;}
+    .cert-empty{grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-light);}
+    .cert-img-card{cursor:pointer;}
+    .cert-img-wrap{position:relative;width:100%;overflow:hidden;border-radius:12px 12px 0 0;background:#000;}
+    .cert-full-img{width:100%;height:220px;object-fit:cover;display:block;transition:transform .4s ease,height .4s ease;}
+    .cert-img-card.zoomed .cert-full-img{height:420px;object-fit:contain;background:#111;}
+    .cert-zoom-hint{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.5);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:.8rem;opacity:.7;transition:opacity .2s;}
+    .cert-img-card:hover .cert-zoom-hint{opacity:1;}
+    .cert-img-card.zoomed .cert-zoom-hint{display:none;}
+    .cert-caption{display:flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;font-size:.85rem;color:var(--text-light);}
+    .cert-caption strong{color:var(--text);font-weight:600;}
+    .cert-caption span{color:var(--text-light);}
+    .cert-caption span+span::before{content:"·";margin-right:.6rem;}
+    </style>
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+    <div class="loader-container">
+        <div class="loader"><div class="loader-circle"></div><div class="loader-circle"></div><div class="loader-circle"></div></div>
+        <p class="loader-text">Loading Portfolio...</p>
+    </div>
+</div>
+
+<div class="cv-modal-overlay" id="cvModalOverlay">
+    <div class="cv-modal">
+        <div class="cv-modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3 id="cvModalTitle">CV Not Available Yet</h3>
+        <p id="cvModalDesc">The CV file hasn't been uploaded yet. Please check back later or contact me directly.</p>
+        <div class="cv-modal-actions">
+            <a href="#contact" class="btn btn-primary" id="cvModalContact">Contact Me</a>
+            <button class="btn btn-secondary" id="cvModalClose">Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="spotlight" id="spotlight"></div>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<div class="scroll-progress"></div>
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><span>S</span></div>
+        <div class="nav-menu">
+            <a href="#home" class="nav-link" data-i18n="navHome">Home</a>
+            <a href="#about" class="nav-link" data-i18n="navAbout">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#experience" class="nav-link" data-i18n="navExp">Experience</a>
+            <a href="#certificates" class="nav-link" data-i18n="navCerts">Certificates</a>
+            <a href="#github" class="nav-link">GitHub</a>
+            <a href="#contact" class="nav-link" data-i18n="navContact">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <div class="lang-switcher" id="langSwitcher">
+                <button class="lang-current" id="langCurrent" aria-haspopup="true" aria-expanded="false">
+                    <img class="flag-img" id="langCurrentFlag" src="" alt="EN">
+                    <span class="lang-code" id="langCurrentCode">EN</span>
+                    <i class="fas fa-chevron-down lang-chevron"></i>
+                </button>
+                <div class="lang-dropdown" id="langDropdown" role="menu">
+                    <button class="lang-option active" data-lang="en" role="menuitem">
+                        <img class="flag-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3CclipPath id='s'%3E%3Cpath d='M0 0v30h60V0z'/%3E%3C/clipPath%3E%3CclipPath id='t'%3E%3Cpath d='M30 15h30v15zv15H0zH0V0zvV0h30z'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23s)'%3E%3Cpath d='M0 0v30h60V0z' fill='%23012169'/%3E%3Cpath d='M0 0l60 30m0-30L0 30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0 0l60 30m0-30L0 30' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/%3E%3Cpath d='M30 0v30M0 15h60' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M30 0v30M0 15h60' stroke='%23C8102E' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E" alt="EN">
+                        <span class="lang-name">English</span>
+                        <i class="fas fa-check lang-check"></i>
+                    </button>
+                    <button class="lang-option" data-lang="az" role="menuitem">
+                        <img class="flag-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 450'%3E%3Crect width='900' height='150' y='0' fill='%230092BC'/%3E%3Crect width='900' height='150' y='150' fill='%23E8112D'/%3E%3Crect width='900' height='150' y='300' fill='%2300B140'/%3E%3Ccircle cx='420' cy='225' r='90' fill='white'/%3E%3Ccircle cx='447' cy='225' r='72' fill='%23E8112D'/%3E%3Cpolygon points='530,225 548,270 592,270 557,296 570,341 530,316 490,341 503,296 468,270 512,270' fill='white'/%3E%3C/svg%3E" alt="AZ">
+                        <span class="lang-name">Azərbaycanca</span>
+                        <i class="fas fa-check lang-check"></i>
+                    </button>
+                    <button class="lang-option" data-lang="ru" role="menuitem">
+                        <img class="flag-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' y='0' fill='%23FFFFFF'/%3E%3Crect width='900' height='200' y='200' fill='%230039A6'/%3E%3Crect width='900' height='200' y='400' fill='%23D52B1E'/%3E%3C/svg%3E" alt="RU">
+                        <span class="lang-name">Русский</span>
+                        <i class="fas fa-check lang-check"></i>
+                    </button>
+                </div>
+            </div>
+            <button class="nav-cv-btn" id="navCvBtn">
+                <i class="fas fa-download"></i>
+                <span data-i18n="navCV">CV</span>
+            </button>
+            <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+            <div class="nav-toggle"><span></span><span></span><span></span></div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero-background"><div class="gradient-blob"></div><div class="gradient-blob"></div></div>
+    <div class="hero-visual">
+        <div class="floating-card code-card"><i class="fas fa-code"></i><h4 data-i18n="cardCode">Clean Code</h4></div>
+        <div class="floating-card design-card"><i class="fas fa-palette"></i><h4 data-i18n="cardDesign">Modern Design</h4></div>
+        <div class="floating-card rocket-card"><i class="fas fa-rocket"></i><h4 data-i18n="cardRocket">Fast Development</h4></div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge"><span data-i18n="heroHello">👋 Hello, I'm</span></div>
+            <h1 class="hero-title">
+                <span class="title-line name-shine">Sübhan</span>
+                <span class="title-line highlight"><span id="typed"></span></span>
+            </h1>
+            <p class="hero-description" data-i18n="heroDesc">A developer from Baku, Azerbaijan. Coding since 2020, driven by curiosity and a commitment to building things that work.</p>
+            <div class="hero-actions">
+                <a href="#github" class="btn btn-primary"><span data-i18n="heroProjects">View Projects</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-secondary"><span data-i18n="heroContact">Contact Me</span></a>
+                <button class="btn btn-outline" id="heroCvBtn"><span data-i18n="heroCV">Download CV</span><i class="fas fa-download"></i></button>
+                <a href="https://github.com/Kage-develop" target="_blank" class="btn btn-outline"><span data-i18n="heroGithub">My GitHub</span><i class="fab fa-github"></i></a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><div class="stat-number">15+</div><div class="stat-label" data-i18n="stat1">Projects Done</div></div>
+                <div class="stat"><div class="stat-number">6+</div><div class="stat-label" data-i18n="stat2">Years Coding</div></div>
+                <div class="stat"><div class="stat-number">10+</div><div class="stat-label" data-i18n="stat3">Technologies</div></div>
+            </div>
+            <div class="hero-stack" aria-label="Core technologies">
+                <span>C++</span><span>C#</span><span>Python</span><span>JavaScript</span><span>Data</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-label" data-i18n="aboutLabel">About Me</span>
+            <h2 class="section-title" data-i18n="aboutTitle">My Journey &amp; Passion</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-content" data-aos="fade-right">
+                <div class="about-text">
+                    <h3 data-i18n="aboutH3">Developer from Baku</h3>
+                    <p data-i18n="aboutP1">My name is Sübhan. I started writing code in 2020, driven by a curiosity for how technology is built — not just how it works. What began as an interest quickly became a discipline.</p>
+                    <p data-i18n="aboutP2">In 2022 I attended a formal course and deepened my foundation in C++. Since then I have continued expanding across C#, Python, Java, HTML, CSS, and data — building skills across multiple layers of software development.</p>
+                    <p data-i18n="aboutP3">I focus on writing clean, purposeful code. My projects range from games and functional web applications to more ambitious systems — each one a step toward mastering the craft.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature"><i class="fas fa-university"></i><div><h4 data-i18n="featEdu">Education</h4><p data-i18n="featEduVal">School No. 254, Baku</p></div></div>
+                    <div class="feature"><i class="fas fa-map-marker-alt"></i><div><h4 data-i18n="featLoc">Location</h4><p data-i18n="featLocVal">Baku, Azerbaijan</p></div></div>
+                    <div class="feature"><i class="fas fa-calendar-alt"></i><div><h4 data-i18n="featExp">Experience</h4><p data-i18n="featExpVal">6+ Years Coding</p></div></div>
+                </div>
+            </div>
+            <div class="skills-section" data-aos="fade-left">
+                <div class="skill-category">
+                    <h4 data-i18n="skillFront">Frontend Development</h4>
+                    <div class="skills-list">
+                        <div class="skill"><span>HTML</span><div class="skill-bar"><div class="skill-progress" data-width="92"></div></div></div>
+                        <div class="skill"><span>CSS</span><div class="skill-bar"><div class="skill-progress" data-width="88"></div></div></div>
+                        <div class="skill"><span>JavaScript</span><div class="skill-bar"><div class="skill-progress" data-width="85"></div></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4 data-i18n="skillBack">Backend Development</h4>
+                    <div class="skills-list">
+                        <div class="skill"><span>C# / .NET</span><div class="skill-bar"><div class="skill-progress" data-width="81"></div></div></div>
+                        <div class="skill"><span>C++</span><div class="skill-bar"><div class="skill-progress" data-width="85"></div></div></div>
+                        <div class="skill"><span>Python</span><div class="skill-bar"><div class="skill-progress" data-width="90"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-showcase">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-label">Skills</span>
+            <h2 class="section-title">Engineering Toolkit</h2>
+        </div>
+        <div class="skill-cloud" data-aos="fade-up">
+            <div class="skill-pill"><i class="fab fa-html5"></i><span>HTML</span></div>
+            <div class="skill-pill"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+            <div class="skill-pill"><i class="fab fa-js"></i><span>JavaScript</span></div>
+            <div class="skill-pill"><i class="fab fa-python"></i><span>Python</span></div>
+            <div class="skill-pill"><i class="fas fa-code"></i><span>C++</span></div>
+            <div class="skill-pill"><i class="fas fa-terminal"></i><span>C# / .NET</span></div>
+            <div class="skill-pill"><i class="fab fa-java"></i><span>Java</span></div>
+            <div class="skill-pill"><i class="fas fa-database"></i><span>Data Science</span></div>
+            <div class="skill-pill"><i class="fas fa-gamepad"></i><span>Game Logic</span></div>
+            <div class="skill-pill"><i class="fab fa-github"></i><span>GitHub</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="experience">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-label" data-i18n="expLabel">Journey</span>
+            <h2 class="section-title" data-i18n="expTitle">My Experience &amp; Timeline</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2025–2026</div>
+                    <h3 data-i18n="tl2026h">Solidifying Core Competencies</h3>
+                    <p data-i18n="tl2026p">Focused on solidifying core competencies. Currently working toward games, fully functional web applications and larger-scale projects.</p>
+                    <div class="timeline-tags"><span>Games</span><span>Web Apps</span><span>Large-scale</span></div>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <h3 data-i18n="tl2024h">Expanding the Stack</h3>
+                    <p data-i18n="tl2024p">Expanded across C#, Python, Java and data. Each language introduced a new perspective on how software systems are designed and built.</p>
+                    <div class="timeline-tags"><span>C#</span><span>Python</span><span>Java</span><span>Data</span></div>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2023</div>
+                    <h3 data-i18n="tl2023h">Into Web Development</h3>
+                    <p data-i18n="tl2023p">Transitioned into web development. Gained hands-on experience with HTML, CSS and JavaScript, delivering first visual and interactive projects.</p>
+                    <div class="timeline-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2022</div>
+                    <h3 data-i18n="tl2022h">Formal Training in C++</h3>
+                    <p data-i18n="tl2022p">Enrolled in a formal course and built a structured foundation in C++. Learned not only how to write code, but how to think like a developer.</p>
+                    <div class="timeline-tags"><span>C++</span><span>Algorithms</span><span>OOP</span></div>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2020</div>
+                    <h3 data-i18n="tl2020h">The Beginning</h3>
+                    <p data-i18n="tl2020p">Recognized coding as the point where computers and creativity converge. That realization marked the beginning of a deliberate journey into software development.</p>
+                    <div class="timeline-tags"><span data-i18n="tagFound">Foundations</span><span data-i18n="tagLearn">Learning</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates" class="certificates">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-label" data-i18n="certLabel">Certificates</span>
+            <h2 class="section-title" data-i18n="certTitle">My Certifications</h2>
+        </div>
+        <div class="cert-grid" id="certGrid" data-aos="fade-up">
+            <div class="cert-card cert-img-card" onclick="this.classList.toggle('zoomed')">
+                <div class="cert-img-wrap">
+                    <img src="Sübhan Sultanlı - Data Science.png" alt="Data Science Certificate" class="cert-full-img">
+                    <span class="cert-badge" data-i18n="certBadgeCompleted">Completed</span>
+                    <div class="cert-zoom-hint"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="cert-caption">
+                    <strong>Data Science</strong>
+                    <span>Microsoft</span>
+                    <span>2024</span>
+                </div>
+            </div>
+            <div class="cert-card cert-img-card" onclick="this.classList.toggle('zoomed')">
+                <div class="cert-img-wrap">
+                    <img src="Sübhan Sultanlı - Python.png" alt="Python Certificate" class="cert-full-img">
+                    <span class="cert-badge" data-i18n="certBadgeCompleted">Completed</span>
+                    <div class="cert-zoom-hint"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="cert-caption">
+                    <strong>Python</strong>
+                    <span>Kaggle</span>
+                    <span>2026</span>
+                </div>
+            </div>
+            <div class="cert-card cert-img-card" onclick="this.classList.toggle('zoomed')">
+                <div class="cert-img-wrap">
+                    <img src="Sübhan Sultanlı - Pythonpi.jpg" alt="Cisco Certificate" class="cert-full-img">
+                    <span class="cert-badge" data-i18n="certBadgeCompleted">Completed</span>
+                    <div class="cert-zoom-hint"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="cert-caption">
+                    <strong>Python</strong>
+                    <span>Cisco Academy</span>
+                    <span>2026</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GITHUB -->
+<section id="github" class="github-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-label">GitHub</span>
+            <h2 class="section-title" data-i18n="githubTitle">My Repositories</h2>
+        </div>
+        <div class="repo-slider-wrapper" data-aos="fade-up">
+            <button class="slider-btn slider-prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+            <div class="repo-slider" id="repoSlider">
+                <div class="repo-track" id="repoTrack">
+                    <div class="github-loading" data-i18n="loadingRepos">Loading repositories...</div>
+                </div>
+            </div>
+            <button class="slider-btn slider-next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info" data-aos="fade-right">
+                <div class="section-header">
+                    <span class="section-label" data-i18n="contactLabel">Contact</span>
+                    <h2 class="section-title" data-i18n="contactTitle">Let's Work Together</h2>
+                </div>
+                <p data-i18n="contactDesc">I'm always open to new opportunities and projects. Feel free to reach out.</p>
+                <div class="contact-methods">
+                    <a href="mailto:sultanlisubhan37@gmail.com" class="contact-method"><i class="fas fa-envelope"></i><span>sultanlisubhan37@gmail.com</span></a>
+                    <a href="https://github.com/Kage-develop" target="_blank" class="contact-method"><i class="fab fa-github"></i><span>github.com/Kage-develop</span></a>
+                    <a href="https://www.instagram.com/kagesan__/" target="_blank" class="contact-method"><i class="fab fa-instagram"></i><span>instagram.com/kagesan__</span></a>
+                    <a href="https://discord.gg/VQrsUf9M3F" target="_blank" class="contact-method"><i class="fab fa-discord"></i><span>discord.gg/VQrsUf9M3F</span></a>
+                </div>
+            </div>
+            <form class="contact-form" id="contact-form" action="https://formspree.io/f/mzdygryn" method="POST" data-aos="fade-left">
+                <div class="form-group">
+                    <label for="name" data-i18n="formName">Name</label>
+                    <input type="text" id="name" name="name" data-i18n-ph="formNamePH" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" data-i18n="formEmail">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" data-i18n="formMsg">Message</label>
+                    <textarea id="message" name="message" rows="5" data-i18n-ph="formMsgPH" placeholder="Your message..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submit-btn">
+                    <span data-i18n="formSend">Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <p>&copy; <span id="year"></span> Sübhan. <span data-i18n="footerRights">All rights reserved.</span></p>
+            <div class="footer-links">
+                <a href="#home" data-i18n="navHome">Home</a>
+                <a href="#about" data-i18n="navAbout">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience" data-i18n="navExp">Experience</a>
+                <a href="#certificates" data-i18n="navCerts">Certificates</a>
+                <a href="#github">GitHub</a>
+                <a href="#contact" data-i18n="navContact">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>AOS.init({duration:700,once:true,offset:60});</script>
+<script src="script.js"></script>
+
+<script>
+const T={
+en:{
+  navHome:"Home",navAbout:"About",navExp:"Experience",navCerts:"Certificates",navContact:"Contact",navCV:"CV",
+  heroHello:"👋 Hello, I'm",
+  heroDesc:"A developer from Baku, Azerbaijan. Coding since 2020, driven by curiosity and a commitment to building things that work.",
+  heroProjects:"View Projects",heroContact:"Contact Me",heroCV:"Download CV",heroGithub:"My GitHub",
+  stat1:"Projects Done",stat2:"Years Coding",stat3:"Technologies",
+  cardCode:"Clean Code",cardDesign:"Modern Design",cardRocket:"Fast Development",
+  aboutLabel:"About Me",aboutTitle:"My Journey & Passion",
+  aboutH3:"Developer from Baku",
+  aboutP1:"My name is Sübhan. I started writing code in 2020, driven by a curiosity for how technology is built — not just how it works. What began as an interest quickly became a discipline.",
+  aboutP2:"In 2022 I attended a formal course and deepened my foundation in C++. Since then I have continued expanding across C#, Python, Java, HTML, CSS, and data — building skills across multiple layers of software development.",
+  aboutP3:"I focus on writing clean, purposeful code. My projects range from games and functional web applications to more ambitious systems — each one a step toward mastering the craft.",
+  featEdu:"Education",featEduVal:"School No. 254, Baku",featLoc:"Location",featLocVal:"Baku, Azerbaijan",featExp:"Experience",featExpVal:"6+ Years Coding",
+  skillFront:"Frontend Development",skillBack:"Backend Development",
+  expLabel:"Journey",expTitle:"My Experience & Timeline",
+  tl2026h:"Solidifying Core Competencies",tl2026p:"Focused on solidifying core competencies. Currently working toward games, fully functional web applications and larger-scale projects.",
+  tl2024h:"Expanding the Stack",tl2024p:"Expanded across C#, Python, Java and data. Each language introduced a new perspective on how software systems are designed and built.",
+  tl2023h:"Into Web Development",tl2023p:"Transitioned into web development. Gained hands-on experience with HTML, CSS and JavaScript, delivering first visual and interactive projects.",
+  tl2022h:"Formal Training in C++",tl2022p:"Enrolled in a formal course and built a structured foundation in C++. Learned not only how to write code, but how to think like a developer.",
+  tl2020h:"The Beginning",tl2020p:"Recognized coding as the point where computers and creativity converge. That realization marked the beginning of a deliberate journey into software development.",
+  tagFound:"Foundations",tagLearn:"Learning",
+  certLabel:"Certificates",certTitle:"My Certifications",
+  certBadgeCompleted:"Completed",certView:"View Certificate",
+  githubTitle:"My Repositories",loadingRepos:"Loading repositories...",
+  contactLabel:"Contact",contactTitle:"Let's Work Together",
+  contactDesc:"I'm always open to new opportunities and projects. Feel free to reach out.",
+  formName:"Name",formNamePH:"Your name",formEmail:"Email",formMsg:"Message",formMsgPH:"Your message...",formSend:"Send Message",
+  formSending:"Sending...",
+  formSuccess:"Message sent! I'll get back to you soon.",
+  formError:"Something went wrong. Please try again.",
+  formConnErr:"Connection error. Please try again.",
+  footerRights:"All rights reserved.",
+  cvModalTitle:"CV Not Available Yet",cvModalDesc:"The CV file hasn't been uploaded yet. Please check back later or contact me directly.",cvModalContact:"Contact Me",cvModalClose:"Close",
+  typedStrings:["Software Developer","Problem Solver","C++ Developer","C# Developer","Web Developer"]
+},
+az:{
+  navHome:"Ana Səhifə",navAbout:"Haqqımda",navExp:"Təcrübə",navCerts:"Sertifikatlar",navContact:"Əlaqə",navCV:"CV",
+  heroHello:"👋 Salam, mən",
+  heroDesc:"Bakıdan bir proqramçı. 2020-ci ildən kod yazıram — texnologiyanın necə qurulduğunu öyrənmək üçün çalışıram.",
+  heroProjects:"Layihələrə bax",heroContact:"Əlaqə yaz",heroCV:"CV yüklə",heroGithub:"GitHub-a bax",
+  stat1:"Tamamlanan Layihə",stat2:"İl Kodlama",stat3:"Texnologiya",
+  cardCode:"Təmiz Kod",cardDesign:"Müasir Dizayn",cardRocket:"Sürətli İnkişaf",
+  aboutLabel:"Haqqımda",aboutTitle:"Yolum & Həvəsim",
+  aboutH3:"Bakıdan Proqramçı",
+  aboutP1:"Mənim adım Sübhandır. Kod yazmağa 2020-ci ildə başladım — texnologiyanın sadəcə necə işlədiyinə deyil, necə qurulduğuna olan maraq məni buna sövq etdi. Əvvəlcə sadəcə bir maraq olan şey tezliklə intizamlı bir fəaliyyətə çevrildi.",
+  aboutP2:"2022-ci ildə rəsmi bir kursa qatıldım və C++ üzrə bilgi yuvamı dərinləşdirdim. O vaxtdan bəri C#, Python, Java, HTML, CSS və məlumatlar üzrə inkişaf etməyə davam etdim — proqram təminatı inkişafının müxtəlif qatlarında bacarıqlar qazandım.",
+  aboutP3:"Diqqətimi təmiz və məqsədyönlü kod yazmağa yönəldirəm. Layihələrim oyunlardan və funksional veb tətbiqlərdən tutmuş daha iddialı sistemlərə qədər uzanır — hər biri sənətin kamil şəkildə mənimsənilməsinə doğru bir addımdır.",
+  featEdu:"Təhsil",featEduVal:"254 nömrəli məktəb, Bakı",featLoc:"Yer",featLocVal:"Bakı, Azərbaycan",featExp:"Təcrübə",featExpVal:"6+ İl Kodlama",
+  skillFront:"Frontend İnkişafı",skillBack:"Backend İnkişafı",
+  expLabel:"Yol",expTitle:"Təcrübəm & Zaman Xətti",
+  tl2026h:"Əsas Bacarıqların Möhkəmləndirilməsi",tl2026p:"Əsas bacarıqları möhkəmləndirməyə fokuslanıram. Hazırda oyunlar, tam funksional veb tətbiqləri və daha böyük miqyaslı layihələr üzərində işləyirəm.",
+  tl2024h:"Stack Genişləndirilməsi",tl2024p:"C#, Python, Java və data sahələrini öyrəndim. Hər dil proqram sistemlərinin necə qurulduğuna dair yeni bir perspektiv açdı.",
+  tl2023h:"Veb İnkişafına Keçid",tl2023p:"Veb inkişafına keçid etdim. HTML, CSS və JavaScript ilə ilk vizual və interaktiv layihələrimi hazırladım.",
+  tl2022h:"C++ üzrə Rəsmi Təlim",tl2022p:"Rəsmi kursa yazıldım və C++ üzrə möhkəm təməl qurdum. Yalnız kod yazmağı deyil, bir tərtibatçı kimi düşünməyi öyrəndim.",
+  tl2020h:"Başlanğıc",tl2020p:"Proqramlaşdırmanı kompüter və yaradıcılığın kəsişdiyi nöqtə kimi tanıdım. Bu, proqram təminatı sahəsindəki məqsədli yolculuğumun başlanğıcı oldu.",
+  tagFound:"Əsaslar",tagLearn:"Öyrənmə",
+  certLabel:"Sertifikatlar",certTitle:"Sertifikatlarım",
+  certBadgeCompleted:"Tamamlandı",certView:"Sertifikata bax",
+  githubTitle:"Repozitoriyalarım",loadingRepos:"Repozitoriyalar yüklənir...",
+  contactLabel:"Əlaqə",contactTitle:"Birlikdə İşləyək",
+  contactDesc:"Həmişə yeni imkanlara və layihələrə açığam. Çəkinmədən yazın.",
+  formName:"Ad",formNamePH:"Adınız",formEmail:"E-poçt",formMsg:"Mesaj",formMsgPH:"Mesajınız...",formSend:"Mesaj Göndər",
+  formSending:"Göndərilir...",
+  formSuccess:"Mesaj göndərildi! Tezliklə cavab verəcəyəm.",
+  formError:"Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.",
+  formConnErr:"Bağlantı xətası. Zəhmət olmasa yenidən cəhd edin.",
+  footerRights:"Bütün hüquqlar qorunur.",
+  cvModalTitle:"CV Hələ Mövcud Deyil",cvModalDesc:"CV faylı hələ yüklənməyib. Zəhmət olmasa bir az sonra yenidən yoxlayın.",cvModalContact:"Əlaqə yaz",cvModalClose:"Bağla",
+  typedStrings:["Proqram Tərtibatçısı","Problem Həlledici","C++ Tərtibatçısı","C# Tərtibatçısı","Veb Tərtibatçısı"]
+},
+ru:{
+  navHome:"Главная",navAbout:"Обо мне",navExp:"Опыт",navCerts:"Сертификаты",navContact:"Контакты",navCV:"CV",
+  heroHello:"👋 Привет, я",
+  heroDesc:"Разработчик из Баку, Азербайджан. Пишу код с 2020 года — движимый любопытством и стремлением создавать работающие вещи.",
+  heroProjects:"Смотреть проекты",heroContact:"Написать мне",heroCV:"Скачать CV",heroGithub:"Мой GitHub",
+  stat1:"Завершённых проектов",stat2:"Лет опыта",stat3:"Технологий",
+  cardCode:"Чистый код",cardDesign:"Современный дизайн",cardRocket:"Быстрая разработка",
+  aboutLabel:"Обо мне",aboutTitle:"Мой путь и увлечения",
+  aboutH3:"Разработчик из Баку",
+  aboutP1:"Меня зовут Сюбхан. Я начал писать код в 2020 году, движимый любопытством к тому, как создаются технологии — не только как они работают. То, что начиналось как интерес, быстро стало дисциплиной.",
+  aboutP2:"В 2022 году я прошёл официальный курс и заложил структурированную основу в C++. С тех пор я продолжил расширяться в C#, Python, Java, HTML, CSS и data — развивая навыки на разных уровнях разработки программного обеспечения.",
+  aboutP3:"Я сосредоточен на написании чистого и целенаправленного кода. Мои проекты варьируются от игр и функциональных веб-приложений до более масштабных систем — каждый из них — шаг к овладению ремеслом.",
+  featEdu:"Образование",featEduVal:"Школа № 254, Баку",featLoc:"Местоположение",featLocVal:"Баку, Азербайджан",featExp:"Опыт",featExpVal:"6+ лет программирования",
+  skillFront:"Frontend-разработка",skillBack:"Backend-разработка",
+  expLabel:"Путь",expTitle:"Мой опыт и хронология",
+  tl2026h:"Укрепление ключевых компетенций",tl2026p:"Сосредоточен на укреплении ключевых компетенций. В настоящее время работаю над играми, полноценными веб-приложениями и масштабными проектами.",
+  tl2024h:"Расширение стека",tl2024p:"Расширил знания в C#, Python, Java и области данных. Каждый язык открыл новый взгляд на проектирование программных систем.",
+  tl2023h:"Переход к веб-разработке",tl2023p:"Перешёл к веб-разработке. Получил практический опыт работы с HTML, CSS и JavaScript, создав первые визуальные и интерактивные проекты.",
+  tl2022h:"Формальное обучение C++",tl2022p:"Прошёл официальный курс и заложил структурированную основу в C++. Научился не просто писать код, но и мыслить как разработчик.",
+  tl2020h:"Начало пути",tl2020p:"Осознал, что программирование — это точка пересечения технологий и творчества. Это понимание стало отправной точкой целенаправленного пути в разработке программного обеспечения.",
+  tagFound:"Основы",tagLearn:"Обучение",
+  certLabel:"Сертификаты",certTitle:"Мои сертификаты",
+  certBadgeCompleted:"Получен",certView:"Смотреть сертификат",
+  githubTitle:"Мои репозитории",loadingRepos:"Загрузка репозиториев...",
+  contactLabel:"Контакты",contactTitle:"Давайте работать вместе",
+  contactDesc:"Я всегда открыт для новых возможностей и проектов. Не стесняйтесь написать мне.",
+  formName:"Имя",formNamePH:"Ваше имя",formEmail:"Email",formMsg:"Сообщение",formMsgPH:"Ваше сообщение...",formSend:"Отправить",
+  formSending:"Отправка...",
+  formSuccess:"Сообщение отправлено! Скоро отвечу.",
+  formError:"Что-то пошло не так. Пожалуйста, попробуйте снова.",
+  formConnErr:"Ошибка соединения. Пожалуйста, попробуйте снова.",
+  footerRights:"Все права защищены.",
+  cvModalTitle:"CV пока недоступно",cvModalDesc:"Файл CV ещё не загружен. Загляните позже или свяжитесь со мной напрямую.",cvModalContact:"Написать мне",cvModalClose:"Закрыть",
+  typedStrings:["Разработчик ПО","Решатель задач","C++ разработчик","C# разработчик","Веб-разработчик"]
+}
+};
+
+const CODES={en:"EN",az:"AZ",ru:"RU"};
+let lang=localStorage.getItem("lang")||"en";
+let typedInstance=null;
+let typedTimer=null;
+let typedState={current:0,char:0,deleting:false,strings:[]};
+
+const FLAGS={};
+document.querySelectorAll(".lang-option").forEach(o=>{FLAGS[o.dataset.lang]=o.querySelector(".flag-img").src;});
+
+function stopHeroTyping(){
+    if(typedTimer){clearTimeout(typedTimer);typedTimer=null;}
+}
+
+function startHeroTyping(strings){
+    stopHeroTyping();
+    const el=document.getElementById("typed");
+    typedState={current:0,char:0,deleting:false,strings:Array.isArray(strings)?strings:[]};
+    el.textContent="";
+    const typeSpeed=60;
+    const backSpeed=35;
+    const backDelay=1800;
+    const nextTick=()=>{
+        const current=typedState.current;
+        const text=typedState.strings[current]||"";
+        if(!typedState.deleting){
+            typedState.char=Math.min(typedState.char+1,text.length);
+            el.textContent=text.substring(0,typedState.char);
+            if(typedState.char===text.length){
+                typedState.deleting=true;
+                typedTimer=setTimeout(nextTick,backDelay);
+                return;
+            }
+            typedTimer=setTimeout(nextTick,typeSpeed);
+            return;
+        }
+        typedState.char=Math.max(typedState.char-1,0);
+        el.textContent=text.substring(0,typedState.char);
+        if(typedState.char===0){
+            typedState.deleting=false;
+            typedState.current=(typedState.current+1)%typedState.strings.length;
+            typedTimer=setTimeout(nextTick,200);
+            return;
+        }
+        typedTimer=setTimeout(nextTick,backSpeed);
+    };
+    nextTick();
+}
+
+function applyLang(l){
+    lang=l; localStorage.setItem("lang",l);
+    const t=T[l];
+    document.documentElement.lang=l;
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const k=el.dataset.i18n;
+        if(t[k]!==undefined) el.textContent=t[k];
+    });
+    document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+        const k=el.dataset.i18nPh;
+        if(t[k]!==undefined) el.placeholder=t[k];
+    });
+    document.getElementById("langCurrentFlag").src=FLAGS[l];
+    document.getElementById("langCurrentFlag").alt=CODES[l];
+    document.getElementById("langCurrentCode").textContent=CODES[l];
+    document.querySelectorAll(".lang-option").forEach(b=>b.classList.toggle("active",b.dataset.lang===l));
+    document.getElementById("cvModalTitle").textContent=t.cvModalTitle;
+    document.getElementById("cvModalDesc").textContent=t.cvModalDesc;
+    document.getElementById("cvModalContact").textContent=t.cvModalContact;
+    document.getElementById("cvModalClose").textContent=t.cvModalClose;
+
+    // i18n objesini global yap — form bildirimleri script.js'den okur
+    window._i18n = t;
+
+    if(typedInstance){typedInstance.destroy();typedInstance=null;}
+    stopHeroTyping();
+    startHeroTyping(t.typedStrings);
+}
+
+const sw=document.getElementById("langSwitcher");
+const lb=document.getElementById("langCurrent");
+lb.addEventListener("click",e=>{e.stopPropagation();sw.classList.toggle("open");lb.setAttribute("aria-expanded",sw.classList.contains("open"));});
+document.querySelectorAll(".lang-option").forEach(o=>o.addEventListener("click",()=>{applyLang(o.dataset.lang);sw.classList.remove("open");lb.setAttribute("aria-expanded","false");}));
+document.addEventListener("click",e=>{if(!sw.contains(e.target)){sw.classList.remove("open");lb.setAttribute("aria-expanded","false");}});
+
+const CV_FILE="cv.pdf";
+let cvAvailable = null;
+async function cvExists(){
+    if (cvAvailable !== null) return cvAvailable;
+    try {
+        const r = await fetch(CV_FILE,{method:"HEAD"});
+        return cvAvailable = r.ok;
+    } catch {
+        return cvAvailable = false;
+    }
+}
+async function handleCV(e){
+    e.preventDefault();
+    if(await cvExists()){
+        const a=document.createElement("a");
+        a.href=CV_FILE;
+        a.download="Subhan_CV.pdf";
+        a.click();
+    }
+}
+async function setupCVButtons(){
+    const available = await cvExists();
+    if (!available) {
+        [document.getElementById("navCvBtn"), document.getElementById("heroCvBtn")].forEach(btn => btn?.remove());
+        const modal = document.getElementById("cvModalOverlay");
+        if (modal) modal.style.display = "none";
+    }
+}
+document.getElementById("navCvBtn").addEventListener("click",handleCV);
+document.getElementById("heroCvBtn").addEventListener("click",handleCV);
+document.getElementById("cvModalClose").addEventListener("click",()=>document.getElementById("cvModalOverlay").classList.remove("show"));
+document.getElementById("cvModalOverlay").addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove("show");});
+document.getElementById("cvModalContact").addEventListener("click",()=>document.getElementById("cvModalOverlay").classList.remove("show"));
+
+applyLang(lang);
+setupCVButtons();
+</script>
+</body>
+</html>
